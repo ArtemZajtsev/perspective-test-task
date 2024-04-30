@@ -8,20 +8,19 @@ import router from './router';
 
 dotenv.config();
 
-connectDB()
+connectDB();
 
 const app: Express = express();
 
-app
-  .use(cors())
-  .use(express.json())
-  .options('*', cors())
-  .use('/', router)
-  .use(errorLogger)
-  .use(errorResponder)
-  .use(invalidPathHandler);
+app.use(cors())
+    .use(express.json())
+    .options('*', cors())
+    .use('/', router)
+    .use(errorLogger)
+    .use(errorResponder)
+    .use(invalidPathHandler);
 
 const port = process.env.PORT || 3111;
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+    console.log(`[server]: Server is running at http://localhost:${port}`);
 });
