@@ -1,20 +1,25 @@
-import express, {Express, Request, Response} from 'express';
-import * as dotenv from 'dotenv';
 import cors from 'cors';
+import * as dotenv from 'dotenv';
+import express, { Express } from 'express';
+
+import connectDB from './model/db';
+import { errorLogger, errorResponder, invalidPathHandler } from './middleware';
+import router from './router';
 
 dotenv.config();
 
-const app: Express = express();
-app.use(cors())
-  .use(express.json())
-  .options('*', cors());
+connectDB()
 
-app.post('/users', (req: Request, res: Response) => {
-  res.send({}).status(201);
-});
-app.get('/users', (req: Request, res: Response) => {
-  res.send([]).status(200);
-});
+const app: Express = express();
+
+app
+  .use(cors())
+  .use(express.json())
+  .options('*', cors())
+  .use('/', router)
+  .use(errorLogger)
+  .use(errorResponder)
+  .use(invalidPathHandler);
 
 const port = process.env.PORT || 3111;
 app.listen(port, () => {
