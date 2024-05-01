@@ -8,7 +8,8 @@
         "test": "set DEBUG=* && jest --testPathPattern=test --coverage",
         "lint": "eslint './src/**/*.ts'",
         "lint:fix": "npm run lint -- --fix",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "seedDb": "ts-node src/model/seedDb.ts"
     },
     "author": "Artem Zaitsev",
     "license": "ISC",
