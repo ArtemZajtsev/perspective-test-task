@@ -1,5 +1,5 @@
 import User from './User';
-import connectDB from './db';
+import connectDB from './connectDb';
 
 const seedData = [
     new User({ name: 'dude1', email: 'dude1@dude.com' }),
@@ -22,7 +22,7 @@ async function seedDb() {
         // inserts as a batch, failure will roll back changes automatically
         await User.insertMany(seedData);
     } catch (err) {
-        console.log('Error while seeding db:', err.message);
+        console.log('Error while seeding db: ', err.message);
         process.exit(1);
     }
 

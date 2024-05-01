@@ -23,7 +23,7 @@ export async function getAllUsers(req: Request, res: Response, next: NextFunctio
             },
         });
     } catch (err) {
-        console.log('Error while getting all users:', err.message);
+        console.log('Error while getting all users: ', err.message);
         next(err);
     }
 }

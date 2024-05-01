@@ -60,4 +60,35 @@ describe('POST /users', () => {
             }),
         );
     });
+
+    describe('input validation', () => {
+        it('fails if user name is missing from payload', async () => {
+            const res = await agent.post(usersPrefix).send({ email: 'email@email.com' });
+
+            expect(res.statusCode).toBe(400);
+            expect(res.body).toEqual({
+                error: 'User validation failed: name: Name is required',
+            });
+        });
+
+        it('fails if user email is missing from payload', async () => {
+            const res = await agent.post(usersPrefix).send({ name: 'testname' });
+
+            expect(res.statusCode).toBe(400);
+            expect(res.body).toEqual({
+                error: 'User validation failed: email: Email is required',
+            });
+        });
+
+        it('fails if user email is invalid', async () => {
+            const res = await agent
+                .post(usersPrefix)
+                .send({ name: 'testname', email: 'invalidemail.com' });
+
+            expect(res.statusCode).toBe(400);
+            expect(res.body).toEqual({
+                error: 'User validation failed: email: Email is invalid',
+            });
+        });
+    });
 });

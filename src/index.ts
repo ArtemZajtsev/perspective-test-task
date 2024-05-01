@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import express, { Express } from 'express';
 
 import { errorLogger, errorResponder, invalidPathHandler } from './middleware';
-import connectDB from './model/db';
+import connectDB from './model/connectDb';
 import router from './router';
 
 dotenv.config();

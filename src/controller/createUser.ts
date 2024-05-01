@@ -15,7 +15,11 @@ export async function createUser(req: Request, res: Response, next: NextFunction
             err = new AppError(409, 'This email already exist');
         }
 
-        console.log('Error while creating user:', err.message);
+        if (err.message.includes('validation failed')) {
+            err = new AppError(400, err.message);
+        }
+
+        console.log('Error while creating user: ', err.message);
         next(err);
     }
 }

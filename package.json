@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "ts-node src/server.ts",
-        "test": "set DEBUG=* && jest --testPathPattern=test --coverage",
+        "test": "set DEBUG=* && jest --testPathPattern=test --coverage --silent",
         "lint": "eslint './src/**/*.ts'",
         "lint:fix": "npm run lint -- --fix",
         "format": "prettier --write .",
