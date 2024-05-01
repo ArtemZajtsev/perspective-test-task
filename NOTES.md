@@ -39,3 +39,75 @@ Tests run on separate small in-memory db defined [here](./test/db.ts). Faster, m
 ### Pagination on get all users endpoint
 
 Did a simple offset/limit pagination for [get all users endpoint](./src/controller/getAllUsers.ts).
+
+### API
+
+Could have done swagger/openapi docs, but its only 2 simple endpoints so i decided not to set it all up.
+
+`POST /users`:
+
+Payload schema:
+Name|Type|Required|Default|Validation|Description
+----|----|-------|-------|------|-----------
+`name`|`string`|`yes`||`string, will be trimmed`|`Name of created user`
+`email`|`string`|`yes`||`string, unique, valiadated against email regexp will be trimmed and lowercased`|`Email of created user`
+
+Example payload: 
+```json
+{
+	"name": "pew",
+	"email": "pew@pew.com"
+}
+```
+
+Example response:
+```json
+{
+	"name": "pew",
+	"email": "pew@pew.com",
+	"_id": "66325465813937e8229bacdf",
+	"createdAt": "2024-05-01T14:40:37.683Z",
+	"updatedAt": "2024-05-01T14:40:37.683Z",
+	"__v": 0
+}
+```
+
+`GET /users`
+
+Query param schema:
+Name|Type|Required|Default|Validation|Description
+----|----|-------|-------|------|-----------
+`created`|`string`|`no`|`"asc"`|`allowed values: ['asc', 'desc', 'ascending', 'descending']`|`Sort response by createdAt in asc or desc`
+`skip`|`number`|`no`|0|`number >= 0`|`How many records to skip`
+`limit`|`number`|`no`|20|`number >= 0`|`How many records to return in 1 response`
+
+Example response:
+
+```json
+{
+	"users": [
+		{
+			"_id": "6632446e13532019af04a2b3",
+			"name": "asd",
+			"email": "bruh@bruhhh.com",
+			"createdAt": "2024-05-01T13:32:30.401Z",
+			"updatedAt": "2024-05-01T13:32:30.401Z",
+			"__v": 0
+		},
+		{
+			"_id": "66325465813937e8229bacdf",
+			"name": "pew",
+			"email": "pew@pew.com",
+			"createdAt": "2024-05-01T14:40:37.683Z",
+			"updatedAt": "2024-05-01T14:40:37.683Z",
+			"__v": 0
+		}
+	],
+	"pagination": {
+		"skip": 0,
+		"limit": 20,
+		"totalRecords": 2,
+		"recordsLeft": 0
+	}
+}
+```
