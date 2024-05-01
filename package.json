@@ -5,6 +5,8 @@
     "main": "index.js",
     "scripts": {
         "start": "ts-node src/server.ts",
+        "build": "npx tsc",
+        "start:docker": "node dist/src/server.js",
         "start:dev": "nodemon src/server.ts",
         "test": "set DEBUG=* && jest --testPathPattern=test --coverage --silent",
         "lint": "eslint './src/**/*.ts'",

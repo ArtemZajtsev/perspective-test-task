@@ -1,0 +1,19 @@
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    command: mongod --quiet --logpath /dev/null 
+
+  server:
+    build:
+      context: .
+    environment:
+      PORT: 4111
+      NODE_ENV: production
+      DB_URL: 'mongodb://mongo/perspective-test-task'
+    ports:
+      - 4111:4111
+    depends_on:
+      - mongo
+
