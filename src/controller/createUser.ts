@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import User from '../model/User';
 import { AppError } from '../utils';
 
+// do we need transaction here?
 export async function createUser(req: Request, res: Response, next: NextFunction) {
     try {
         const { name, email } = req.body;
