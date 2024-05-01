@@ -11,7 +11,7 @@
         "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
         "target": "ES6",
-        "types": ["node"]
+        "types": ["node", "jest"]
     },
     "include": ["./src/**/*.ts", "./test/**/*.ts"]
 }

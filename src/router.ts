@@ -4,7 +4,7 @@ import { getAllUsers } from './controller/getAllUsers';
 import { validateQueryParams } from './middleware';
 import { getAllUsersQueryParamsSchema } from './validationSchema';
 
-const usersPrefix = '/users';
+export const usersPrefix = '/users';
 
 const router = express.Router();
 

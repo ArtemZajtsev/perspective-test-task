@@ -2,13 +2,15 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import express, { Express } from 'express';
 
-import connectDB from './model/db';
 import { errorLogger, errorResponder, invalidPathHandler } from './middleware';
+import connectDB from './model/db';
 import router from './router';
 
 dotenv.config();
 
-connectDB();
+if (process.env.NODE_ENV !== 'test') {
+    connectDB();
+}
 
 const app: Express = express();
 
@@ -20,7 +22,4 @@ app.use(cors())
     .use(errorResponder)
     .use(invalidPathHandler);
 
-const port = process.env.PORT || 3111;
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+export default app;
